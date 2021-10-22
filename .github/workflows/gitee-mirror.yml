@@ -1,0 +1,27 @@
+name: gitee-mirror
+
+on: [push, delete, create, release]
+
+jobs:
+  gitee:
+    if: github.repository == 'fujieid/jap-ldap-demo'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Configure Private Key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "StrictHostKeyChecking no" >> ~/.ssh/config
+      - name: Push Mirror
+        env:
+          SOURCE_REPO: "https://github.com/fujieid/jap-ldap-demo.git"
+          DESTINATION_REPO: "git@gitee.com:fujieid/jap-ldap-demo.git"
+        run: |
+          git clone --mirror "$SOURCE_REPO" && cd `basename "$SOURCE_REPO"`
+          git remote set-url --push origin "$DESTINATION_REPO"
+          git fetch -p origin
+          git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+          git push --mirror

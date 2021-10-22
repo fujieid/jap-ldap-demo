@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jap-ldap 登录示例</title>
+</head>
+<style>
+    div > a {
+        margin-left: 20px;
+    }
+</style>
+<body>
+
+<form action="/ldap/login" method="post">
+    <div>
+        <label for="username">账号：</label>
+        <input type="text" name="username" id="username" value="cn=admin,dc=test,dc=com">
+    </div>
+    <div>
+        <label for="password">密码：</label>
+        <input type="text" name="password" id="password" value="123456">
+    </div>
+    <div>
+        <input type="submit" value="登录">
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  ldap:
+    image: osixia/openldap
+    container_name: ldap
+    hostname: ldap
+    ports:
+      - 389:389
+      - 636:636
+    environment:
+      # LDAP 组织名称
+      LDAP_TLS: "false"
+      # LDAP 组织名称
+      LDAP_ORGANISATION: test
+      # LDAP 域名
+      LDAP_DOMAIN: test.com
+      # LDAP 密码，默认登录用户名：admin
+      LDAP_ADMIN_PASSWORD: 123456
+      LDAP_CONFIG_PASSWORD: 123456
+    volumes:
+      # 数据库存储目录
+      - /var/ldap/data:/var/lib/ldap
+      # 配置文件目录
+      - /var/ldap/conf:/etc/ldap/slapd.d
+    restart: always
+  # Redis
+  ldap-admin:
+    image: osixia/phpldapadmin
+    container_name: ldap-admin
+    hostname: ldap-admin
+    environment:
+      # 禁用HTTPS
+      PHPLDAPADMIN_HTTPS: "false"
+      # LDAP 的 IP 或者域名，此处为容器名
+      PHPLDAPADMIN_LDAP_HOSTS: ldap
+    ports:
+      - 19999:80
+    restart: always
+    depends_on:
+      - ldap
+    links:
+      - ldap
