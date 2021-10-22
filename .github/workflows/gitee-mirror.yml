@@ -14,6 +14,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          echo "Host gitee.com" >> ~/.ssh/config
+          echo "HostkeyAlgorithms +ssh-rsa" >> ~/.ssh/config
+          echo "PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
           echo "StrictHostKeyChecking no" >> ~/.ssh/config
       - name: Push Mirror
         env:
