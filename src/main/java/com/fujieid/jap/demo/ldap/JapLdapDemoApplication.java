@@ -1,5 +1,6 @@
 package com.fujieid.jap.demo.ldap;
 
+import com.fujieid.jap.core.util.JapUtil;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,7 @@ public class JapLdapDemoApplication implements ApplicationRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(JapLdapDemoApplication.class, args);
+        JapUtil.printBanner();
     }
 
     @Override

@@ -13,6 +13,6 @@ import com.fujieid.jap.sso.config.JapSsoConfig;
  */
 public class JapConfigContext {
 
-    public static boolean sso = true;
+    public static boolean sso = false;
     public static String strategy = "";
 }

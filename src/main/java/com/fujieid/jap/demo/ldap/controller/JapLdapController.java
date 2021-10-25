@@ -59,10 +59,7 @@ public class JapLdapController {
 
     @PostMapping("/login")
     public ModelAndView renderAuth(HttpServletRequest request, HttpServletResponse response) {
-        JapStrategy ldapStrategy = new LdapStrategy(japUserService, new JapConfig()
-                .setSso(JapConfigContext.sso)
-                .setSsoConfig(new JapSsoConfig()
-                        .setCookieDomain("jap.com")));
+        JapStrategy ldapStrategy = new LdapStrategy(japUserService, new JapConfig());
         JapResponse japResponse = ldapStrategy.authenticate(new LdapConfig()
                         .setUrl("ldap://localhost:389")
                         .setBindDn("cn=admin,dc=test,dc=com")
