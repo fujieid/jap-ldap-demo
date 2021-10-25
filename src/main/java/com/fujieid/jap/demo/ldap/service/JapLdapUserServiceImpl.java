@@ -9,11 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 适用于 jap-social 模块，实现 getByPlatformAndUid 和 createAndGetSocialUser 方法，如果需要sso登录，则必须实现 getById 方法
- *
  * @author yadong.zhang (yadong.zhang0415(a)gmail.com)
  * @version 1.0.0
- * @date 2021/1/12 14:09
  * @since 1.0.0
  */
 @Service
