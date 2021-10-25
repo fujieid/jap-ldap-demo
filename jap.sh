@@ -12,8 +12,7 @@ help(){
 
 case "$1" in
   'p')
-    bin/push.sh
-    git push origin master
+    git push origin main
 	;;
   'ldap')
     cd docker && docker-compose -p ldap up -d
